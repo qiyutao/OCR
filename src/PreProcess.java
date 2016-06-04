@@ -63,13 +63,14 @@ public class PreProcess {
 			for(int y=0;y<hImg;y++) {
 				if(gray[x][y]>=threshold) {
 					gray[x][y] |= 0x00ffff;
+					//System.out.println(gray[x][y]);
 				} else {
 					gray[x][y] &= 0xff0000;
 				}
 				binaryImg.setRGB(x, y, gray[x][y]);
 			}
 		}
-		
+		creatGrayImg();
 	}
 	
 	public void creatGrayImg() {
@@ -87,5 +88,9 @@ public class PreProcess {
 	
 	public static void main(String[] args) {
 		PreProcess bin = new PreProcess(new File("d:\\1.jpg"));
-	}
+		BufferedImage buffImage = bin.getBinaryImg();
+		Recognize r = new Recognize(buffImage);
+		r.division();
+		//r.match();
+ 	}
 }
